@@ -1,7 +1,7 @@
 import React from "react";
 const ExpenseForm=()=>{
     return(
-        <div>Expense form to add or edit </div>
+        <div>Working on office laptop </div>
     )
 }
 export default ExpenseForm;
