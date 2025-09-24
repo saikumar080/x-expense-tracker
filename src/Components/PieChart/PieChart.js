@@ -11,12 +11,12 @@ const data=[
 const COLORS=["#0088FE", "#00C49F", "#FFBB28", "#FF8042"]
 const ExpenseCHart=()=>{
     return(
-        <PieChart width={400} height={400}>
+        <PieChart width={250} height={250}>
             <Pie
                 data={data}
                 cx="50%"
                 cy="50%"
-                outerRadius={150}
+                outerRadius={100}
                 dataKey="value"
                 label
             >
