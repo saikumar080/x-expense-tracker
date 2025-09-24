@@ -12,7 +12,7 @@ const ExpenseTrackerHeader=()=>{
            
             <Grid container spacing={3} sx={{display:"flex", justifyContent:"space-around"}}>
               <Grid item xs={12} md={4} sx={{display:"flex"}}>
-                <Card sx={{ flex:1,p:2}} variant={"outlined"}>
+                <Card sx={{ flex:1,p:2, bgcolor:"#9b9b9b", borderRadius:"10px"}} variant={"outlined"}>
                   < Display />
                 </Card>
               </Grid>
