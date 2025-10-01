@@ -1,7 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import React, { useState } from "react";
 const Display=()=>{
-   const[income, setIncome]=useState(0);
+   const[income, setIncome]=useState(5000);
    
     return(
         <div className={"display-wallet"} style={{fontFamily:"Ubuntu", fontWeight:"bold"}}>

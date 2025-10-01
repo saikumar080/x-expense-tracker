@@ -10,7 +10,7 @@ const ExpenseTrackerHeader=()=>{
         <>
           <Box component={"section"} sx={{p:3, bgcolor:" #4B4B4B", border:'1px solid #555',borderRadius:2, boxShadow:3}}>
            
-            <Grid container spacing={3} sx={{display:"flex", justifyContent:"space-around"}}>
+            <Grid container spacing={3} alignItems={"stretch"} sx={{display:"flex", justifyContent:"space-around"}}>
               <Grid item xs={12} md={4} sx={{display:"flex"}}>
                 <Card sx={{ flex:1,p:2, bgcolor:"#9b9b9b", borderRadius:"10px"}} variant={"outlined"}>
                   < Display />
@@ -18,13 +18,13 @@ const ExpenseTrackerHeader=()=>{
               </Grid>
               
              <Grid item xs={12} md={4} sx={{display:"flex"}}>
-                <Card sx={{ flex:1, p:2}} variant={"outlined"}>
+                <Card sx={{ flex:1, p:2, bgcolor:"#9b9b9b"}} variant={"outlined"}>
                   <ExpenseForm />
                 </Card>
               </Grid>
 
               <Grid item xs={12} md={4} sx={{display:"flex"}}>
-                <Card sx={{flex:1, p:2}} variant={"outlined"}>
+                <Card sx={{flex:1, p:2,bgcolor:"#4b4b4b"}} variant={"outlined"}>
                   <ExpenseCHart />
                 </Card>
               </Grid>
