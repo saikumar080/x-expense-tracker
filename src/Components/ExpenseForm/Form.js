@@ -1,80 +1,178 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
+  Box,
+  Modal,
+  Card,
+  CardContent,
   TextField,
-  Button,
+  Select,
   MenuItem,
-  Grid,
+  InputLabel,
+  FormControl,
+  Button,
+  Alert,
+  Collapse,
+  Fade,
+  Backdrop,
+  Typography,
 } from "@mui/material";
 
-const ExpenseForm = ({ open, handleClose, walletBalance, setWalletBalance, expenses, setExpenses }) => {
-  const [formData, setFormData] = useState({ title: "", price: "", category: "", date: "" });
+const categories = ["Food", "Travel", "Shopping", "Bills", "Other"];
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+const AddExpenseForm = ({ open, handleClose }) => {
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [date, setDate] = useState("");
+  const [expenses, setExpenses] = useState([]);
+  const [error, setError] = useState({ show: false, message: "" });
+  const [success, setSuccess] = useState({ show: false, message: "" });
+
+  // Load existing expenses from localStorage
+  useEffect(() => {
+    const savedExpenses = localStorage.getItem("expenses");
+    if (savedExpenses) setExpenses(JSON.parse(savedExpenses));
+  }, []);
+
+  // Save expenses to localStorage whenever updated
+  useEffect(() => {
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+  }, [expenses]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const price = parseFloat(formData.price);
-
-    if (price > walletBalance) {
-      alert("Cannot spend more than wallet balance!");
+    if (!title || !price || !category || !date) {
+      setError({ show: true, message: "Please fill all fields!" });
       return;
     }
 
-    const newExpense = { ...formData, price, id: Date.now() };
-    const updatedExpenses = [...expenses, newExpense];
-    setExpenses(updatedExpenses);
-    localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
-    setWalletBalance(walletBalance - price);
-    setFormData({ title: "", price: "", category: "", date: "" });
+    const newExpense = { title, price: Number(price), category, date };
+    setExpenses((prev) => [...prev, newExpense]);
+
+    setSuccess({ show: true, message: "Expense added successfully!" });
     handleClose();
+    setTitle(""); setPrice(""); setCategory(""); setDate("");
+
+    setTimeout(() => setSuccess({ show: false, message: "" }), 2000);
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
-      <DialogTitle sx={{ textAlign: "center", fontWeight: "bold", pb: 1 }}>Add Expenses</DialogTitle>
-      <DialogContent>
-        <form onSubmit={handleSubmit}>
-          <Grid container spacing={2} sx={{ mb: 2 }}>
-            <Grid item xs={12} sm={3}>
-              <TextField label="Title" name="title" value={formData.title} onChange={handleChange} required fullWidth />
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              <TextField label="Price" name="price" type="number" value={formData.price} onChange={handleChange} required fullWidth />
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              <Button variant="outlined" onClick={handleClose} fullWidth sx={{ height: 56 }}>Cancel</Button>
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              <Button type="submit" variant="contained" fullWidth sx={{ bgcolor: "#ff7043", "&:hover": { bgcolor: "#ff4d4d" }, height: 56 }}>
+    <Modal
+      open={open}
+      onClose={handleClose}
+      closeAfterTransition
+      BackdropComponent={Backdrop}
+      BackdropProps={{ timeout: 300 }}
+    >
+      <Fade in={open}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+            bgcolor: "white",
+            boxShadow: 24,
+            borderRadius: 2,
+            p: 3,
+            width: 400,
+          }}
+        >
+          <Card sx={{ boxShadow: "none" }}>
+            <CardContent>
+              <Typography variant="h6" sx={{ mb: 2, fontWeight: 700, textAlign: "center" }}>
                 Add Expense
-              </Button>
-            </Grid>
-          </Grid>
+              </Typography>
 
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField select label="Category" name="category" value={formData.category} onChange={handleChange} required fullWidth>
-                <MenuItem value="Food">Food</MenuItem>
-                <MenuItem value="Rent">Rent</MenuItem>
-                <MenuItem value="Shopping">Shopping</MenuItem>
-                <MenuItem value="Travel">Travel</MenuItem>
-                <MenuItem value="Other">Other</MenuItem>
-              </TextField>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField label="Date" name="date" type="date" value={formData.date} onChange={handleChange} InputLabelProps={{ shrink: true }} required fullWidth />
-            </Grid>
-          </Grid>
-        </form>
-      </DialogContent>
-    </Dialog>
+              {/* Error alert */}
+              <Collapse in={error.show}>
+                <Alert severity="error" sx={{ mb: 2 }}>
+                  {error.message}
+                </Alert>
+              </Collapse>
+
+              {/* Expense Title */}
+              <TextField
+                label="Title"
+                name="title"
+                fullWidth
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                sx={{ mb: 2 }}
+              />
+
+              {/* Expense Price */}
+              <TextField
+                label="Price"
+                name="price"
+                type="number"
+                fullWidth
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                sx={{ mb: 2 }}
+              />
+
+              {/* Expense Category */}
+              <FormControl fullWidth sx={{ mb: 2 }}>
+                <InputLabel id="category-label">Category</InputLabel>
+                <Select
+                  labelId="category-label"
+                  label="Category"
+                  name="category"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                >
+                  {categories.map((cat) => (
+                    <MenuItem key={cat} value={cat}>
+                      {cat}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
+              {/* Expense Date */}
+              <TextField
+                label="Date"
+                name="date"
+                type="date"
+                fullWidth
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                InputLabelProps={{ shrink: true }}
+                sx={{ mb: 3 }}
+              />
+
+              {/* Buttons */}
+              <Box display="flex" justifyContent="space-between">
+                <Button
+                  type="submit"
+                  variant="contained"
+                  sx={{
+                    bgcolor: "#b58b00",
+                    "&:hover": { bgcolor: "#a07a00" },
+                    fontWeight: "bold",
+                  }}
+                >
+                  Add Expense
+                </Button>
+                <Button
+                  type="button"
+                  variant="outlined"
+                  color="error"
+                  onClick={handleClose}
+                  sx={{ fontWeight: "bold" }}
+                >
+                  Cancel
+                </Button>
+              </Box>
+            </CardContent>
+          </Card>
+        </Box>
+      </Fade>
+    </Modal>
   );
 };
 
-export default ExpenseForm;
+export default React.memo(AddExpenseForm);

@@ -7,7 +7,7 @@ function App() {
   return (
     <Box className="App" sx={{p:4}}>
       
-     <Typography sx={{fontFamily:"Ubuntu, sans-serif", fontSize:'32px',fontWeight:700, lineHeight:1,color:'#FFFFFF', mb:3}}>Expense Tracker</Typography>
+     <h1 style={{fontFamily:"Ubuntu, sans-serif", fontSize:'32px',fontWeight:700, lineHeight:1,color:'#FFFFFF', mb:3}}>Expense Tracker</h1>
      <ExpenseTrackerHeader />
      
     </Box>
