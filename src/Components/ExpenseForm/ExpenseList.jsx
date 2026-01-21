@@ -1,5 +1,5 @@
 import React from "react";
-import { useExpense } from "../context/ExpenseContext";
+import { useExpense } from "../../context/ExpenseContext";
 import ExpenseItem from "./ExpenseItem";
 
 export default function ExpenseList() {

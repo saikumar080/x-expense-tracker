@@ -1,0 +1,53 @@
+.card{
+  height: 180px;
+  width: 355px;
+  border-radius: 15px;
+  padding: 20px;
+  top: 140px;
+  left: 90px;
+  background-color: #9b9b9b;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+}
+.title{
+
+    font-size: 30px;
+    font-weight: 400;
+    font-family: 'ubuntu', sans-serif;
+    line-height: 100%;
+    letter-spacing: 0%;
+    width: 320px;
+    height: 34px;
+    top:192px;
+    left: 113px;
+}
+.amount{
+    color:rgb(164, 235, 93);
+    font-weight: 700;
+    font-size: 32px bold;
+    font-family: 'ubuntu', sans-serif;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-left: 10px;
+    
+}
+.addButton{
+    width: 120px;
+    height: 35px;
+    background-color: #a4e63a;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'ubuntu', sans-serif;
+    line-height: 100%;
+    letter-spacing: 0%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

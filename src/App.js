@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { SnackbarProvider } from "notistack";
-import WalletBalance from "./Components/WalletBalance";
-import ExpenseModal from "./Components/ExpenseModal";
-import ExpenseList from "./Components/ExpenseList";
+import WalletBalance from "./Components/WalletBalance/WalletBalance";
+import ExpenseModal from "./Components/ExpenseForm/ExpenseModal";
+import ExpenseList from "./Components/ExpenseForm/ExpenseList";
 import CategoryPieChart from "./Components/Charts/CatergoryPieChart";
 import ExpenseBarChart from "./Components/Charts/ExpenseBarChart";
+import Header from "./Components/Header";
+import "./App.css";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -12,28 +14,21 @@ function App() {
   return (
     <SnackbarProvider maxSnack={3}>
         <div className="container">
-          <header>
-            <h1>Expense Tracker</h1>
-            <WalletBalance />
-            <button className="add-btn" onClick={() => setOpen(true)}>
-              Add Expense
-            </button>
-          </header>
-
-          <main className="grid">
-            <section className="expenses">
+           <Header  />
+           <div className="summary-grid">
+              <WalletBalance className="summary-card" />
+              <ExpenseList className="summary-card" />
+              <CategoryPieChart className="summary-card" />
+           </div>
+           <div className="main-section">
+            <div className="transactions">
               <ExpenseList />
-            </section>
-
-            <section className="charts">
-              <h2>Expense Summary</h2>
-              <CategoryPieChart />
-
-              <h2>Expense Trends</h2>
+            </div>
+            <div className="top-expenses">
               <ExpenseBarChart />
-            </section>
-          </main>
+            </div>
 
+           </div>
           <ExpenseModal isOpen={open} onClose={() => setOpen(false)} />
         </div>
     </SnackbarProvider>

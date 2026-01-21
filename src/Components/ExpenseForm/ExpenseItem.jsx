@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useExpense } from "../context/ExpenseContext";
+import { useExpense } from "../../context/ExpenseContext";
 import ExpenseModal from "./ExpenseModal";
 function ExpenseItem({expense}){
     const{dispatch}=useExpense();
