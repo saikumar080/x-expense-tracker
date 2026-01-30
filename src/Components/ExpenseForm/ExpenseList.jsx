@@ -1,7 +1,7 @@
 import React,{useState} from "react";
-import {Card, Button, CardContent,Stack,Typography, Dialog,DialogTitle, DialogContent,TextField, DialogActions, Slide, Snackbar,Alert} from '@mui/material';
+import {Card, Button, CardContent,Stack,Typography, Dialog,DialogTitle, DialogContent,TextField,  Slide, Snackbar,Alert} from '@mui/material';
 import { useExpense } from "../../context/ExpenseContext";
-import ExpenseItem from "./ExpenseItem";
+// import ExpenseItem from "./ExpenseItem";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -36,7 +36,7 @@ export default function ExpenseList() {
             <CardContent sx={{height:'100%', display:'flex', flexDirection:'column', justifyContent:'space-between',alignItems:'center'}}>
                 <Stack spacing={2} alignItems={"center"}>
                     <Typography variant="h5" >
-                        Wallet Balance: ₹ 
+                        Expense: ₹ 
                         <Typography
                             component="span"
                             sx={{color:"#A4EB5D", fontWeight:"700", fontSize:32,ml:1}}
