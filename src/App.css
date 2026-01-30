@@ -12,12 +12,12 @@ html, body{
     min-height: 100vh;
     box-sizing: border-box;
     background-color: #3B3B3B;
-    border: 24px;
+    border: 24px solid transparent;
     border-radius: 8px;
 }
 .summary-grid{
     display: grid;
-    grid-template-columns: repeat(auto-fit, repeat(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     margin: 24px 0px;
     color: #FFFFFF;

@@ -51,3 +51,23 @@
     justify-content: center;
     align-items: center;
 }
+.addButton:hover{
+    background-color: #8cc32a;
+} 
+.cancelButton{
+    width: 120px;
+    height: 35px;
+    background-color: #e04e4e;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'ubuntu', sans-serif;
+    line-height: 100%;
+    letter-spacing: 0%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
