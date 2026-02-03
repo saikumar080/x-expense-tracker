@@ -31,19 +31,21 @@ export default  function WalletBalance() {
 
     return(
     <>
-        <Card className="card" sx={{height:180, width:'100%', maxWidth:350, borderRadius:3, padding:2, backgroundColor:'#9B9B9B', color:'#FFFFFF',fontFamily:'Ubuntu, sans-serif',fontWeight:'700', boxShadow:'0px 4px 10px rgba(0,0,0,0.1)', transition:'transform 0.3s ease ', cursor:"pointer", '&:hover':{transform:'scale(1.02)'}}}>
+        <Card className="card" sx={{ width: '100%', minHeight: 160,  borderRadius:12, backgroundColor:'#9B9B9B', color:'#FFFFFF',fontFamily:'Ubuntu, sans-serif',fontWeight:'700', boxShadow:'0px 4px 10px rgba(0,0,0,0.1)', transition:'transform 0.3s ease ', cursor:"pointer", '&:hover':{transform:'scale(1.02)'}}}>
             <CardContent sx={{height:'100%', display:'flex', flexDirection:'column', justifyContent:'space-between',alignItems:'center'}}>
-                <Stack spacing={2} alignItems={"center"}>
-                    <Typography variant="h5" >
+                <Stack spacing={2} alignItems={"center"} >
+                    <Typography variant="h5" sx={{fontSize:{xs:"1rem", md:"1.2rem"}}} >
                         Wallet Balance: ₹ 
                         <Typography
                             component="span"
-                            sx={{color:"#A4EB5D", fontWeight:"700", fontSize:32,ml:1}}
+                            sx={{color:"#A4EB5D", fontWeight:"700",  fontSize: { xs: 20, sm: 24, md: 28, lg: 32 },ml:1}}
                         >
                             {state.balance}
                         </Typography>
                     </Typography>
-                    <Button variant="contained" sx={{bgcolor:"#A4E63A","&:hover":{bgcolor:"#388E3C"},justifyContent:"center", alignItems:"center", gap:2    }} onClick={() => setShowForm(true)}>+ Add Income</Button>
+                    <Button variant="contained" sx={{bgcolor:"#A4E63A","&:hover":{bgcolor:"#388E3C"},justifyContent:"center", alignItems:"center", gap:2, fontSize: { xs: "0.75rem", sm: "0.875rem" },
+                paddingX: { xs: 1.5, sm: 2 },
+                paddingY: { xs: 0.5, sm: 1 }   }} onClick={() => setShowForm(true)}>+ Add Income</Button>
                 
                 </Stack>
                 
@@ -61,7 +63,7 @@ export default  function WalletBalance() {
         >
             <DialogTitle sx={{color:"#212121"}}>Add Balance</DialogTitle>
             <DialogContent>
-                <Stack direction={"row"} spacing={1} mt={1} alignItems={"center"}>
+                <Stack direction={{ xs: "column", sm: "row" }} spacing={1} mt={1} alignItems={"center"}>
                     <TextField 
                         label="Income Amount"
                         type="number"

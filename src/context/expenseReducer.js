@@ -5,7 +5,10 @@ export const initialState = {
 export const expenseReducer = (state, action) => {
     switch(action.type){
         case "ADD_BALANCE":
-            return{...state,balance:state.balance+action.payload};
+            return{
+                ...state,
+                balance:state.balance+action.payload
+            };
         case "ADD_EXPENSE":
             return{
                 ...state,
@@ -13,11 +16,14 @@ export const expenseReducer = (state, action) => {
                 expenses:[action.payload,...state.expenses]      
             };
         case "EDIT_EXPENSE":{
+            const existingExpense=state.expenses.find(exp=>exp.id===action.payload.id);
+            if(!existingExpense) return state;
+            
             const updateExpense=state.expenses.map(exp=>
                 exp.id===action.payload.id ? action.payload :exp
             );
-            const oldAmount=state.expenses.find(e=>e.id === action.payload.id).amount
-            const diff=action.payload.amount - oldAmount;
+            
+            const diff=action.payload.amount -existingExpense.amount;
             return{
                 ...state,
                 balance:state.balance - diff,
