@@ -180,13 +180,13 @@ const totalExpenses = state.expenses.reduce(
             />
 
             <TextField
-              label="Amount"
+              label="price"
               type="number"
-              name="amount"
+              name="price"
               fullWidth
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              inputProps={{  name: "amount" }}
+              inputProps={{  name: "price" }}
             />
 
             <TextField 

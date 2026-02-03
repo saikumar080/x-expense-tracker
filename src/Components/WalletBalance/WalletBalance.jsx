@@ -67,6 +67,7 @@ export default  function WalletBalance() {
                     <TextField 
                         label="Income Amount"
                         type="number"
+                        name="income"
                         fullWidth
                         value={income}
                         onChange={(e) => setIncome(e.target.value)}
@@ -77,8 +78,8 @@ export default  function WalletBalance() {
 
                     />
                     
-                    <Button onClick={handleAddIncomeForm} variant="contained" sx={{bgcolor:"#ffc107","&:hover":{bgcolor:"#ff9800"}}}>Add Balance</Button>
-                    <Button onClick={() => setShowForm(false)} sx={{bgcolor:"#eeeeee","&:hover":{bgcolor:"#d84315"},color:"black"}}>Cancel</Button>
+                    <Button onClick={handleAddIncomeForm} variant="contained"  type="submit" sx={{bgcolor:"#ffc107","&:hover":{bgcolor:"#ff9800"}}}>Add Balance</Button>
+                    <Button onClick={() => setShowForm(false)} variant="contained" type="submit" sx={{bgcolor:"#eeeeee","&:hover":{bgcolor:"#d84315"},color:"black"}}>Cancel</Button>
                 </Stack>
             </DialogContent>
         </Dialog>
