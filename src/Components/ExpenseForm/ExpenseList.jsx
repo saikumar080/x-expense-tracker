@@ -136,6 +136,7 @@ const totalExpenses = state.expenses.reduce(
             </Typography>
 
             <Button
+              type="submit"
               variant="contained"
               size="small"
               sx={{
