@@ -6,6 +6,7 @@ export const initialState = {
 export const expenseReducer = (state, action) => {
     switch(action.type){
         case "ADD_BALANCE":
+        
             return{
                 ...state,
                 balance:state.balance+action.payload
@@ -14,7 +15,7 @@ export const expenseReducer = (state, action) => {
             return{
                 ...state,
                 balance:state.balance -action.payload.amount,
-                expenses:[action.payload,...state.expenses]      
+                expenses:[...state.expenses, action.payload]      
             };
         case "SET_EDIT_EXPENSE":
             return{

@@ -29,7 +29,7 @@ const totalExpenses = state.expenses.reduce(
 
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");
-  const [amount, setAmount] = useState("");
+  const [price, setPrice  ] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -40,7 +40,7 @@ const totalExpenses = state.expenses.reduce(
    useEffect(()=>{
     if(state.editExpense){
       setTitle(state.editExpense.title);
-      setAmount(state.editExpense.amount);
+      setPrice(state.editExpense.amount);
       setCategory(state.editExpense.category);
       setDate(state.editExpense.date);
       setShowForm(true);
@@ -48,7 +48,7 @@ const totalExpenses = state.expenses.reduce(
    },[state.editExpense]);
   // handle add expense form
   const handleAddExpense = () => {
-    const numAmount = Number(amount);
+    const numAmount = Number(price);
 
     if (!title || !category || !date || isNaN(numAmount) || numAmount <= 0) {
       setErrorMsg("Please fill all fields correctly.");
@@ -97,7 +97,7 @@ const totalExpenses = state.expenses.reduce(
 
     // reset form
     setTitle("");
-    setAmount("");
+    setPrice("");
     setCategory("");
     setDate("");
     setShowForm(false);
@@ -180,10 +180,10 @@ const totalExpenses = state.expenses.reduce(
             <TextField
               label="Amount"
               type="number"
-              name="amount"
+              name="price"
               fullWidth
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
               
             />
 
