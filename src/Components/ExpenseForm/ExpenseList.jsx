@@ -198,7 +198,7 @@ const totalExpenses = state.expenses.reduce(
       SelectProps={{
         native: true,
         inputProps: {
-          name: "category",   // ✅ THIS is what Cypress needs
+          name: "category",  
         },
       }}
     >
