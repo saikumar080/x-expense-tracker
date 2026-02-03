@@ -146,7 +146,6 @@ const totalExpenses = state.expenses.reduce(
                 paddingY: { xs: 0.5, sm: 1 }
               }}
               onClick={() => setShowForm(true)}
-              type={"submit"}
             >
               + Add Expense
             </Button>

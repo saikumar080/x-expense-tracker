@@ -15,9 +15,9 @@ import { useExpense } from "../../context/ExpenseContext";
 export default function RecentTransactions() {
   const { state, dispatch } = useExpense();
   const catergoryLabelMap = {
-    Food: "Food",
-    Travel: "Travel",
-    Entertainment: "Entertainment",
+    food: "Food",
+    travel: "Travel",
+    entertainment: "Entertainment",
   }
 
   const handleDelete = (expense) => {
