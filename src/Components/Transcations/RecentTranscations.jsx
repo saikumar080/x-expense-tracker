@@ -14,6 +14,11 @@ import { useExpense } from "../../context/ExpenseContext";
 
 export default function RecentTransactions() {
   const { state, dispatch } = useExpense();
+  const catergoryLabelMap = {
+    Food: "Food",
+    Travel: "Travel",
+    Entertainment: "Entertainment",
+  }
 
   const handleDelete = (expense) => {
     dispatch({
@@ -69,8 +74,8 @@ export default function RecentTransactions() {
                   {expense.title}
                 </Typography>
                 <Typography variant="caption" color="text.secondary">
-                  {expense.category} • {expense.date}
-                </Typography>
+  {catergoryLabelMap[expense.category]} • {expense.date}
+</Typography>
               </Stack>
 
               <Typography

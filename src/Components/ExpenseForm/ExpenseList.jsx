@@ -34,6 +34,7 @@ const totalExpenses = state.expenses.reduce(
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const inputRef = React.useRef(null);
 
@@ -51,10 +52,12 @@ const totalExpenses = state.expenses.reduce(
     const numAmount = Number(amount);
 
     if (!title || !category || !date || isNaN(numAmount) || numAmount <= 0) {
+      setErrorMsg("Please fill all fields correctly.");
       setSnackbarOpen(true);
       return;
     }
     if(!state.editExpense && numAmount > state.balance) {
+      setErrorMsg("Insufficient balance.");
       setSnackbarOpen(true);
       return;
     }
@@ -168,32 +171,38 @@ const totalExpenses = state.expenses.reduce(
           <Stack spacing={2} mt={1}>
             <TextField
               label="Title"
+              name="title"
               fullWidth
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               inputRef={inputRef}
+              inputProps={{name: "title"}}
             />
 
             <TextField
               label="Amount"
               type="number"
+              name="amount"
               fullWidth
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
+              inputProps={{  name: "amount" }}
             />
 
-            <TextField
+            <TextField 
               select
               label="Category"
+              name="category"
               fullWidth
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-            >
+              inputProps={{ name: "category" }}
+              >
               <MenuItem value="Food">Food</MenuItem>
               <MenuItem value="Travel">Travel</MenuItem>
-              <MenuItem value="Shopping">Shopping</MenuItem>
-              <MenuItem value="Bills">Bills</MenuItem>
+              <MenuItem value="Entertainment">Entertainment</MenuItem>
             </TextField>
+
 
             <TextField
               type="date"
@@ -214,7 +223,13 @@ const totalExpenses = state.expenses.reduce(
               </Button>
 
               <Button
-                onClick={() => setShowForm(false)}
+                onClick={() => {
+                  setShowForm(false);
+                  dispatch({
+                    type: "SET_EDIT_EXPENSE",
+                    payload: null
+                  })
+                }}
                 sx={{
                   bgcolor: "#eeeeee",
                   "&:hover": { bgcolor: "#d84315" },
@@ -236,7 +251,7 @@ const totalExpenses = state.expenses.reduce(
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert severity="error" sx={{ width: "100%" }}>
-          Invalid input or insufficient balance
+          {errorMsg}
         </Alert>
       </Snackbar>
     </>

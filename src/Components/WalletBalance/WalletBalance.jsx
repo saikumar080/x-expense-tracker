@@ -72,6 +72,7 @@ export default  function WalletBalance() {
                         onChange={(e) => setIncome(e.target.value)}
                         inputRef={inputRef}
                         onKeyDown={(e)=>e.key=== 'Enter' && handleAddIncomeForm()}
+                        inputProps={{placeholder:"Income Amount"}}
                         sx={{flex:1}}
 
                     />
