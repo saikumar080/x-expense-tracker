@@ -189,19 +189,25 @@ const totalExpenses = state.expenses.reduce(
               inputProps={{  name: "price" }}
             />
 
-            <TextField 
-              select
-              label="Category"
-              name="category"
-              fullWidth
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              inputProps={{ name: "category" }}
-              >
-              <MenuItem value="Food">Food</MenuItem>
-              <MenuItem value="Travel">Travel</MenuItem>
-              <MenuItem value="Entertainment">Entertainment</MenuItem>
-            </TextField>
+    <TextField
+      label="Category"
+      fullWidth
+      select
+      value={category}
+      onChange={(e) => setCategory(e.target.value)}
+      SelectProps={{
+        native: true,
+        inputProps: {
+          name: "category",   // ✅ THIS is what Cypress needs
+        },
+      }}
+    >
+      <option value=""></option>
+      <option value="Food">Food</option>
+      <option value="Travel">Travel</option>
+      <option value="Entertainment">Entertainment</option>
+    </TextField>
+
 
 
             <TextField
