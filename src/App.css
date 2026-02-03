@@ -12,12 +12,15 @@ html, body{
 }
 .container{
     
-    padding: 20px;
+    padding: 16px;
     color: #FFFFFF;
     min-height: 100vh;
     box-sizing: border-box;
     background-color: #3B3B3B;
     border-radius: 8px;
+    max-width: 1200px;
+    margin:0 auto;
+    
 }
 .header-title{
     font-size: 2rem;
@@ -29,38 +32,36 @@ html, body{
     text-align: center;
   }
 }
-.main-section {
-  display: flex;
-  gap: 24px;
-  margin-top: 32px;
+
+.main-content{
+    display: flex;
+    gap: 16px;
 }
-@media (max-width:900px) {
-  .main-section {
+.recent-transactions{
+    width: 60%;
+}
+.top-expenses{
+    width: 40%;
+}
+@media (max-width: 1200px) {
+  .main-content{
     flex-direction: column;
   }
-  
+  .recent-transactions, .top-expenses{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
-.transactions {
-  flex: 0 0 60%;
-}
-
-.top-expenses {
-  flex: 1;
-  min-width: 300px;
-}
-
 body{
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
 }
 
-  .main-section {
-    flex-direction: column;
-  }
 
-  .transactions,
-  .top-expenses {
-  width: 100%;
-  overflow-x: auto;
-}
+
+
 

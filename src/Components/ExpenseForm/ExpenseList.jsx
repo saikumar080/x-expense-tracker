@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   Button,
@@ -37,6 +37,15 @@ const totalExpenses = state.expenses.reduce(
 
   const inputRef = React.useRef(null);
 
+   useEffect(()=>{
+    if(state.editExpense){
+      setTitle(state.editExpense.title);
+      setAmount(state.editExpense.amount);
+      setCategory(state.editExpense.category);
+      setDate(state.editExpense.date);
+      setShowForm(true);
+    }
+   },[state.editExpense]);
   // handle add expense form
   const handleAddExpense = () => {
     const numAmount = Number(amount);
@@ -45,22 +54,44 @@ const totalExpenses = state.expenses.reduce(
       setSnackbarOpen(true);
       return;
     }
-
-    if (numAmount > state.balance) {
+    if(!state.editExpense && numAmount > state.balance) {
       setSnackbarOpen(true);
       return;
     }
-
-    dispatch({
-      type: "ADD_EXPENSE",
-      payload: {
-        id: Date.now(),
-        title,
-        amount: numAmount,
-        category,
-        date
+    if(state.editExpense){
+      const oldAmount=state.editExpense.amount;
+      const extraAmount=numAmount - oldAmount;
+      if(extraAmount >0 && extraAmount > state.balance){
+        setSnackbarOpen(true);
+        return;
       }
-    });
+      dispatch({
+        type: "EDIT_EXPENSE",
+        payload: {
+          id: state.editExpense.id,
+          title,  
+          amount: numAmount,
+          category,
+          date
+        }
+      })
+      dispatch({
+        type:"SET_EDIT_EXPENSE",
+        payload:null
+      });
+    }else{
+      dispatch({
+        type: "ADD_EXPENSE",
+        payload: {
+          id: Date.now(),
+          title,
+          amount: numAmount,
+          category,
+          date
+        }
+      })
+    }
+
 
     // reset form
     setTitle("");
@@ -69,7 +100,7 @@ const totalExpenses = state.expenses.reduce(
     setDate("");
     setShowForm(false);
   };
-
+ 
   return (
     <>
       {/* Expense Card */}
@@ -130,7 +161,7 @@ const totalExpenses = state.expenses.reduce(
         onEntered={() => inputRef.current?.focus()}
       >
         <DialogTitle sx={{ color: "#212121" }}>
-          Add Expense
+          {state.editExpense ? "Edit Expense" : "Add New Expense"}
         </DialogTitle>
 
         <DialogContent>
@@ -179,7 +210,7 @@ const totalExpenses = state.expenses.reduce(
                 variant="contained"
                 sx={{ bgcolor: "#ffc107", "&:hover": { bgcolor: "#ff9800" } }}
               >
-                Add Expense
+               {state.editExpense ? "Update Expense" : "Add Expense"}
               </Button>
 
               <Button
