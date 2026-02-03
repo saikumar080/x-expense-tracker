@@ -12,7 +12,6 @@ import {
   Slide,
   Snackbar,
   Alert,
-  MenuItem
 } from "@mui/material";
 import { useExpense } from "../../context/ExpenseContext";
 
