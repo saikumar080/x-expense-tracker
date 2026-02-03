@@ -146,6 +146,7 @@ const totalExpenses = state.expenses.reduce(
                 paddingY: { xs: 0.5, sm: 1 }
               }}
               onClick={() => setShowForm(true)}
+              type={"submit"}
             >
               + Add Expense
             </Button>
@@ -175,36 +176,33 @@ const totalExpenses = state.expenses.reduce(
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               inputRef={inputRef}
-              inputProps={{name: "title"}}
             />
 
             <TextField
-              label="price"
+              label="Amount"
               type="number"
-              name="price"
+              name="amount"
               fullWidth
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              inputProps={{  name: "price" }}
+              
             />
 
     <TextField
       label="Category"
+      name="category"
       fullWidth
       select
       value={category}
       onChange={(e) => setCategory(e.target.value)}
       SelectProps={{
         native: true,
-        inputProps: {
-          name: "category",  
-        },
       }}
     >
       <option value=""></option>
-      <option value="Food">Food</option>
-      <option value="Travel">Travel</option>
-      <option value="Entertainment">Entertainment</option>
+      <option value="food">Food</option>
+      <option value="travel">Travel</option>
+      <option value="entertainment">Entertainment</option>
     </TextField>
 
 
@@ -212,6 +210,7 @@ const totalExpenses = state.expenses.reduce(
             <TextField
               type="date"
               label="Date"
+              name="date"
               fullWidth
               InputLabelProps={{ shrink: true }}
               value={date}
