@@ -10,7 +10,7 @@ function ExpenseBarChart() {
 
   if (data.length === 0) return null;
 
-  // Sort descending by value so largest bar is on top
+ 
   data = data.sort((a, b) => b.value - a.value);
 
   return (
