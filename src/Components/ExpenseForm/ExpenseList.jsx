@@ -101,13 +101,7 @@ export default function ExpenseList() {
     <>
       {/* Expense Card */}
       <Card
-        sx={{
-          width: "100%",
-          minHeight: 160,
-          borderRadius: 2,
-          backgroundColor: "#9B9B9B",
-          color: "#fff",
-        }}
+        sx={{ width: '100%', minHeight: 160,  borderRadius:12, backgroundColor:'#9B9B9B', color:'#FFFFFF',fontFamily:'Ubuntu, sans-serif',fontWeight:'700', boxShadow:'0px 4px 10px rgba(0,0,0,0.1)', transition:'transform 0.3s ease ', cursor:"pointer", '&:hover':{transform:'scale(1.02)'}}}
       >
         <CardContent>
           <Stack spacing={2} alignItems="center">

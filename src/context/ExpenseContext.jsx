@@ -2,12 +2,16 @@ import { createContext,  useContext, useEffect, useReducer } from "react";
 import { expenseReducer, initialState } from "./expenseReducer";
 const ExpenseContext=createContext();
 export function ExpenseProvider({children}){
-    const stored=JSON.parse(localStorage.getItem("expenseData"));
-    const[state,dispatch]=useReducer(expenseReducer,stored || initialState);
+    const[state,dispatch]=useReducer(expenseReducer,initialState);
     useEffect(()=>{
-        localStorage.setItem("expenseData",JSON.stringify(state));
+        localStorage.setItem("expenses",JSON.stringify(state.expenses));
 
-    },[state]);
+    },[ state.expenses]);
+    useEffect(()=>{
+        localStorage.setItem("balance",JSON.stringify(state.balance));
+    },[state.balance]);
+
+
     return(
         <ExpenseContext.Provider value={{state,dispatch}}>
             {children}
