@@ -1,6 +1,6 @@
 export const initialState = {
     balance:5000,
-    expenses:[],
+    expenses: JSON.parse(localStorage.getItem("expenses")) || [],
     editExpense:null
 };
 export const expenseReducer = (state, action) => {
